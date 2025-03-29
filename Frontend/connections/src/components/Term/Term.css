@@ -1,0 +1,31 @@
+.term {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #B7B7B7;
+    background-color: #F5F5F7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    margin: .8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.term.selected {
+    background-color: #7E8EF1;
+    color: white;
+    transform: scale(1.05);
+}
+
+.term:hover {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+@media only screen and (max-width: 600px) {
+    .term {
+        width: 70px;
+        height: 70px;
+        font-size: .8rem;
+    }
+}

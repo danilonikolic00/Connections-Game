@@ -1,4 +1,4 @@
-import Connections from "./Connections"
+import Connections from "./components/Connections/Connections"
 import './App.css'
 function App() {
 

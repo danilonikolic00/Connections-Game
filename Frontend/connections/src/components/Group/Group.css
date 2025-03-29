@@ -1,10 +1,10 @@
-.group-container{
-    border: 1px solid black;
+.group-container {
+    border: 5px solid #604CC3;
     width: 500px;
     text-align: center;
-    padding: 1rem 0;
+    padding-bottom: 1rem;
     border-radius: 20px;
-    background-color: blueviolet;
+    background-color: #615EFC;
     color: white;
     margin: 10px 0;
 }
@@ -16,4 +16,10 @@
 
 .group-container h1 {
     margin: 10px 0;
+}
+
+@media only screen and (max-width: 600px) {
+    .group-container{
+        width: 350px;
+    }
 }

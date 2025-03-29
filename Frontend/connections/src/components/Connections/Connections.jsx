@@ -1,8 +1,9 @@
 import './Connections.css'
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Group from "./Group";
-import Term from "./Term";
+import Group from "../Group/Group";
+import Term from "../Term/Term";
+import logo from "../../../src/assets/unnamed.png"
 
 const Connections = () => {
     const [unsolved, setUnsolved] = useState([]);
@@ -74,6 +75,10 @@ const Connections = () => {
 
     return (
         <div className="connections-container">
+            <div className="logo">
+                <img src={logo} />
+                <h1>Connections</h1>
+            </div>
             {groupNames.map((group, index) => (
                 <Group key={group} groupName={group} solvedTerms={solved[index]} />
             ))}
@@ -89,13 +94,13 @@ const Connections = () => {
             </div>
             {groupNames.length != 4 && mistakes != 0 &&
                 <div className="buttons">
-                    <button onClick={handleCheck}>Check</button>
-                    <button onClick={() => setSelectedTerms([])}>Deselect</button>
-                    <button onClick={() => setUnsolved(shuffleArray(unsolved))}>Shuffle</button>
+                    <button className="button" onClick={handleCheck}>Check</button>
+                    <button className="button" onClick={() => setSelectedTerms([])}>Deselect</button>
+                    <button className="button" onClick={() => setUnsolved(shuffleArray(unsolved))}>Shuffle</button>
                 </div>}
             <p>Mistakes remaining:</p>
             <div className="mistakes">
-                {Array.from({ length: mistakes }).map((index) => (
+                {Array.from({ length: mistakes }).map((_,index) => (
                     <div key={index} className='mistake'></div>
                 ))}
             </div>
