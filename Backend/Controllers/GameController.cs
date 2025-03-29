@@ -17,9 +17,9 @@ public class GameController : ControllerBase
         _config = config;
     }
 
-    [Route("GetFourGroups")]
+    [Route("GetTerms")]
     [HttpGet]
-    public async Task<IActionResult> GetFourGroups()
+    public async Task<IActionResult> GetTerms()
     {
         int count = await Context.Groups.CountAsync();
         if (count < 4)
@@ -36,16 +36,14 @@ public class GameController : ControllerBase
                                  .Where(t => groupIds.Contains(t.Group.GroupId))
                                  .ToListAsync();
 
-        var result = randomGroups.Select(g => new
-        {
-            GroupId = g.GroupId,
-            GroupName = g.GroupName,
-            Terms = terms.Where(t => t.Group.GroupId == g.GroupId)
-                         .Select(t => t.TermName)
-                         .ToList()
-        }).ToList();
+        List<string> allTerms = new();
 
-        return Ok(result);
+        foreach (Term term in terms)
+        {
+            allTerms.Add(term.TermName);
+        }
+
+        return Ok(allTerms);
     }
 
     [Route("UpdateScore/{id}/{win}")]
@@ -120,9 +118,9 @@ public class GameController : ControllerBase
             foreach (var guess in remain_guesses)
             {
                 if (!terms.Contains(guess))
-                    return Ok("Group not guessed right!");
+                    return Ok(null);
             }
-            return Ok($"Group guessed right! {term.GroupName}");
+            return Ok(term.GroupName);
         }
         catch (Exception e)
         {

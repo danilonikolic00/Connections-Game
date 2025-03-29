@@ -1,0 +1,106 @@
+import './Connections.css'
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Group from "./Group";
+import Term from "./Term";
+
+const Connections = () => {
+    const [unsolved, setUnsolved] = useState([]);
+    const [groupNames, setGroupNames] = useState([]);
+    const [solved, setSolved] = useState([]);
+    const [selectedTerms, setSelectedTerms] = useState([])
+    const [mistakes, setMistakes] = useState(4);
+
+    useEffect(() => {
+        getFourGroups();
+    }, []);
+
+    useEffect(() => {
+        setTimeout(() => {
+            if (mistakes === 0) {
+                alert(`Game over! You found ${groupNames.length} out of 4 groups.`);
+            }
+            if (groupNames.length === 4) {
+                alert("Congratulations! You won!");
+            }
+        }, 100);
+    }, [mistakes, groupNames.length])
+
+    const shuffleArray = (array) => {
+        const shuffled = [...array];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+    }
+
+    const getFourGroups = async () => {
+        const response = await axios.get('http://localhost:5035/Game/GetTerms');
+        const terms = response.data;
+        if (terms.length > 0) {
+            const shuffledTerms = shuffleArray(terms);
+            setUnsolved(shuffledTerms);
+        }
+    }
+
+    const handleSelectTerm = (term) => {
+        setSelectedTerms(prevSelected => {
+            if (prevSelected.includes(term)) {
+                return prevSelected.filter(t => t !== term);
+            }
+            if (prevSelected.length < 4) {
+                return [...prevSelected, term];
+            }
+            return prevSelected;
+        });
+    }
+
+    const handleCheck = async () => {
+        if (selectedTerms.length < 4)
+            return;
+        const response = await axios.get
+            (`http://localhost:5035/Game/CheckGuess/${selectedTerms[0]}/${selectedTerms[1]}/${selectedTerms[2]}/${selectedTerms[3]}`);
+        if (response.data) {
+            setGroupNames(prevGroups => [response.data, ...prevGroups]);
+            setSolved(prevSelected => [selectedTerms, ...prevSelected]);
+            setUnsolved(prevUnsolved => prevUnsolved.filter(term => !selectedTerms.includes(term)));
+            setSelectedTerms([]);
+        }
+        else {
+            setMistakes(prevMistakes => prevMistakes - 1);
+        }
+    }
+
+    return (
+        <div className="connections-container">
+            {groupNames.map((group, index) => (
+                <Group key={group} groupName={group} solvedTerms={solved[index]} />
+            ))}
+            <div className="terms-container">
+                {unsolved.length > 0 && unsolved.map((term) => (
+                    <Term
+                        key={term}
+                        termName={term}
+                        isSelected={selectedTerms.includes(term)}
+                        onClick={() => handleSelectTerm(term)}
+                    />
+                ))}
+            </div>
+            {groupNames.length != 4 && mistakes != 0 &&
+                <div className="buttons">
+                    <button onClick={handleCheck}>Check</button>
+                    <button onClick={() => setSelectedTerms([])}>Deselect</button>
+                    <button onClick={() => setUnsolved(shuffleArray(unsolved))}>Shuffle</button>
+                </div>}
+            <p>Mistakes remaining:</p>
+            <div className="mistakes">
+                {Array.from({ length: mistakes }).map((index) => (
+                    <div key={index} className='mistake'></div>
+                ))}
+            </div>
+        </div>
+    );
+}
+
+export default Connections;

@@ -1,0 +1,19 @@
+.group-container{
+    border: 1px solid black;
+    width: 500px;
+    text-align: center;
+    padding: 1rem 0;
+    border-radius: 20px;
+    background-color: blueviolet;
+    color: white;
+    margin: 10px 0;
+}
+
+.group-container p {
+    display: inline;
+    padding: 0 10px;
+}
+
+.group-container h1 {
+    margin: 10px 0;
+}
