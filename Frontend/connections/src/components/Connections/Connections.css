@@ -1,18 +1,20 @@
 .connections-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .connections-container p {
   margin: .5rem;
 }
+
 .logo {
   display: flex;
   align-items: center;
   margin: .5rem 0;
 }
+
 .logo h1 {
   font-size: 3rem;
   margin: 0 1rem;
@@ -21,36 +23,38 @@
 .logo img {
   width: 40px;
   height: 40px;
-  
+
 }
+
 .terms-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 600px;
-    margin: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 600px;
+  margin: 10px 0;
 }
 
 .mistakes {
-    display: flex;;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  ;
+  justify-content: center;
+  align-items: center;
 }
 
 .mistake {
-    width: 20px;
-    height: 20px;
-    background-color: #604CC3;
-    margin: 0 10px;
-    border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  background-color: #604CC3;
+  margin: 0 10px;
+  border-radius: 50%;
 }
 
 .buttons {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 300px;
 }
 
 .button {
@@ -66,14 +70,14 @@
   display: flex;
   flex-direction: row;
   flex-shrink: 0;
-  font-family: "RM Neue",sans-serif;
+  font-family: "RM Neue", sans-serif;
   font-size: 100%;
   line-height: 1.15;
   margin: 0;
   padding: 10px 21px;
   text-align: center;
   text-transform: none;
-  transition: color .13s ease-in-out, background .13s ease-in-out,opacity .13s ease-in-out,box-shadow .13s ease-in-out;
+  transition: color .13s ease-in-out, background .13s ease-in-out, opacity .13s ease-in-out, box-shadow .13s ease-in-out;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -88,7 +92,7 @@
 }
 
 @media only screen and (max-width: 600px) {
-  .terms-container{
+  .terms-container {
     width: 400px;
   }
 }

@@ -24,7 +24,7 @@ const Connections = () => {
             if (groupNames.length === 4) {
                 alert("Congratulations! You won!");
             }
-        }, 100);
+        }, 1000);
     }, [mistakes, groupNames.length])
 
     const shuffleArray = (array) => {
