@@ -1,6 +1,5 @@
 ## Connections 🧩
-A web application for grouping related items built with .NET and React.js.
-Find the common connections between the given items.
+A web application for grouping related items built with .NET and React.js. Find the common connections between the given items.
 
 ## About
 - [Features](#features)
@@ -20,7 +19,7 @@ Find the common connections between the given items.
 
 ---
 ## How to Play
-- Select Items: Click on items that you think belong to the same group (e.g., all fruits, countries, or card symbols).
+- Select Items: Click on items that you think belong to the same group (e.g., all card symbols).
 
 - Submit Group: Click "Check" to verify your selection.
 
@@ -42,8 +41,8 @@ Find the common connections between the given items.
 ## Screenshots
 Game UI  
 
-<div align="center"> <img src="Connections-UI.png"> </div>
+<div align="center"> <img src="/Assets/Connections-UI.png"> </div>
 
 Grouped Items  
 
-<div align="center"> <img src="Connections-Group.png"> </div>  
+<div align="center"> <img src="/Assets/Connections-Group.png"> </div>  
