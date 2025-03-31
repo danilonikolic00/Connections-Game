@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Group from "../Group/Group";
 import Term from "../Term/Term";
+import GameModal from "../UI/GameModal"
 import logo from "../../../src/assets/unnamed.png"
 
 const Connections = () => {
@@ -11,18 +12,19 @@ const Connections = () => {
     const [solved, setSolved] = useState([]);
     const [selectedTerms, setSelectedTerms] = useState([])
     const [mistakes, setMistakes] = useState(4);
+    const [modalMessage, setModalMessage] = useState(null);
 
     useEffect(() => {
         getFourGroups();
     }, []);
 
     useEffect(() => {
+        if (mistakes === 0) {
+            setModalMessage(`Game over! You found ${groupNames.length} out of 4 groups.`);
+        }
         setTimeout(() => {
-            if (mistakes === 0) {
-                alert(`Game over! You found ${groupNames.length} out of 4 groups.`);
-            }
             if (groupNames.length === 4) {
-                alert("Congratulations! You won!");
+                setModalMessage("Congratulations! You won!");
             }
         }, 1000);
     }, [mistakes, groupNames.length])
@@ -73,8 +75,20 @@ const Connections = () => {
         }
     }
 
+    const closeModal = () => {
+        setModalMessage(null);
+        window.location.reload()
+    };
+
     return (
         <div className="connections-container">
+            {modalMessage && (
+                <GameModal
+                    message={modalMessage}
+                    onClose={closeModal}
+                    isAlert={false}
+                />
+            )}
             <div className="logo">
                 <img src={logo} />
                 <h1>Connections</h1>
@@ -100,7 +114,7 @@ const Connections = () => {
                 </div>}
             <p>Mistakes remaining:</p>
             <div className="mistakes">
-                {Array.from({ length: mistakes }).map((_,index) => (
+                {Array.from({ length: mistakes }).map((_, index) => (
                     <div key={index} className='mistake'></div>
                 ))}
             </div>
